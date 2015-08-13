@@ -1,0 +1,82 @@
+#
+# Datata
+#
+datata_setup/local/
+
+#
+# Django
+#
+000*.py
+*/migrations
+static_root/
+static_root/*
+
+#
+# Google Charts
+#
+gviz-api.js
+
+#
+# SSL Certificates
+#
+*.pem
+
+#
+# gaenv configuration
+#
+# GAE conf mediante de pip instal -t libs -r requirements.txt
+# Se necesita appengine_config.py para deploy
+# appengine_config.py
+
+
+libs/*
+libs/
+
+#
+# Compiled source
+#
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+
+#
+# Logs and databases
+#
+*.log
+*.sql
+*.sqlite
+
+#
+# OS generated files
+#
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+#
+# Python
+#
+nosetests.xml
+coverage.xml
+restoredb.py
+
+#
+# Test Reports
+#
+cover
+.coverage
+
+#
+# Others
+#
+media/*
+media/
