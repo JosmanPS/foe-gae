@@ -11,11 +11,28 @@
   <div class="container">
     <h3>Registra a los miebros de tu organización estudiantil</h3>
     <br>
+
+    <h4>Presidente</h4>
     <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form_presidente.as_p }}
+    <br>
+
+    <h4>Secretario</h4>
+    {{ form_secretario.as_p }}
+    <br>
+
+    <h4>Tesorero</h4>
+    {{ form_tesorero.as_p }}
+    <br>
+
+    <h4>Redes sociales</h4>
+    <p>Se deben ingresar los datos aunque esta persona tenga otro puesto.</p>
+    {{ form_redes.as_p }}
+    <br>
+    
     <center>
-        <button type="submit" name="submit" class="btn">Enviar <i class="mdi-content-send right white-text"></i></button>
+        <button type="submit" name="submit" class="btn">Finalizar <i class="mdi-content-send right white-text"></i></button>
     </center>
       <br>
     </form>

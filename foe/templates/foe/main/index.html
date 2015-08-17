@@ -26,4 +26,56 @@
     </div>
 </div>
 
+<!-- Instrucciones registro -->
+<div id="intro" class="section scrollspy">
+    <div class="container">
+        <div class="row">
+            <div  class="col s12">
+                <h2 class="center header text_h2"> Instrucciones para registrar tu <span class="span_h2">Organización Estudiantil</span>.
+            </div>
+
+            <div  class="col s12 m4 l4">
+                <div class="center promo promo-example">
+                    <i class="mdi-social-group"></i>
+                    <h5 class="promo-caption">
+                      <a href="{% url "registro_oe" %}">
+                        Registra los datos generales de tu OE
+                      </a>
+                    </h5>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="center promo promo-example">
+                    <i class="mdi-action-credit-card"></i>
+                    <h5 class="promo-caption">
+                      <a href="{% url "registro_bancario" %}">
+                        Registra tus datos bancarios
+                      </a>
+                    </h5>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="center promo promo-example">
+                    <i class="mdi-social-group-add"></i>
+                    <h5 class="promo-caption">
+                      <a href="{% url "registro_miembro" %}">
+                        Registra tu mesa directiva
+                      </a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="section scrollspy" id="team">
+    <div class="container">
+      <h2 class="center header text_h2"> Seguimos en construcción. Espera más contenido pronto. </h2>
+    </div>
+</div>
+
+<br>
+
 {% endblock content %}

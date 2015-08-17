@@ -99,7 +99,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
 
@@ -174,3 +175,6 @@ STATICFILES_DIRS = (
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 
 CRISPY_FAIL_SILENTLY = not DEBUG
+
+if IS_PROD:
+    DEFAULT_FILE_STORAGE = 'foe_gae.storage.GoogleCloudStorage'

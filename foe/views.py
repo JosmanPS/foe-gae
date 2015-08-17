@@ -35,7 +35,7 @@ def registro_oe(request):
             f = form.save()
             f.slug = slugify(f.nombre)
             f.save()
-            return redirect(reverse('registro_oe'))
+            return redirect(reverse('registro_bancario'))
 
     else:
         if oe:
@@ -79,27 +79,133 @@ def miembros_oe(request):
     args = dict()
     usuario = request.user
     oe = get_object_or_404(OrganizacionEstudiantil, usuario=usuario)
-    m_oe = Miembro(organizacion_estudiantil=oe)
-    m = Miembro.objects.filter(organizacion_estudiantil=oe)
+    pres_oe = Miembro(organizacion_estudiantil=oe,
+                      cargo='presidente')
+    pres = Miembro.objects.filter(organizacion_estudiantil=oe,
+                                  cargo='presidente')
+    sec_oe = Miembro(organizacion_estudiantil=oe,
+                     cargo='secretario')
+    sec = Miembro.objects.filter(
+        organizacion_estudiantil=oe,
+        cargo='secretario')
+    tes_oe = Miembro(
+        organizacion_estudiantil=oe,
+        cargo='tesorero')
+    tes = Miembro.objects.filter(
+        organizacion_estudiantil=oe,
+        cargo='tesorero')
+    redes_oe = Miembro(
+        organizacion_estudiantil=oe,
+        cargo='redes')
+    redes = Miembro.objects.filter(
+        organizacion_estudiantil=oe,
+        cargo='redes')
 
     if request.method == 'POST':
-        print(usuario)
-        if m:
-            form = MiembroForm(request.POST, request.FILES, instance=m[0])
+        if pres:
+            form_presidente = MiembroForm(
+                request.POST,
+                request.FILES,
+                instance=pres[0],
+                prefix='presidente')
         else:
-            form = MiembroForm(request.POST, request.FILES, instance=m_oe)
-        print(request.FILES)
-        print(form.is_valid())
-        if form.is_valid():
-            form.save()
+            form_presidente = MiembroForm(
+                request.POST,
+                request.FILES,
+                instance=pres_oe,
+                prefix='presidente')
+
+        if sec:
+            form_secretario = MiembroForm(
+                request.POST,
+                request.FILES,
+                instance=sec[0],
+                prefix='secretario')
+        else:
+            form_secretario = MiembroForm(
+                request.POST,
+                request.FILES,
+                instance=sec_oe,
+                prefix='secretario')
+
+        if tes:
+            form_tesorero = MiembroForm(
+                request.POST,
+                request.FILES,
+                instance=tes[0],
+                prefix='tesorero')
+        else:
+            form_tesorero = MiembroForm(
+                request.POST,
+                request.FILES,
+                instance=tes_oe,
+                prefix='tesorero')
+
+        if redes:
+            form_redes = MiembroForm(
+                request.POST,
+                request.FILES,
+                instance=redes[0],
+                prefix='redes')
+        else:
+            form_redes = MiembroForm(
+                request.POST,
+                request.FILES,
+                instance=redes_oe,
+                prefix='redes')
+            
+        if form_presidente.is_valid():
+            form_presidente.save()
+        if form_secretario.is_valid():
+            form_secretario.save()
+        if form_tesorero.is_valid():
+            form_tesorero.save()
+        if form_redes.is_valid():
+            form_redes.save()
             return redirect('/')
 
     else:
-        if m:
-            form = MiembroForm(instance=m[0])
+        if pres:
+            form_presidente = MiembroForm(
+                instance=pres[0],
+                prefix='presidente')
         else:
-            form = MiembroForm(instance=m_oe)
-    args['form'] = form
+            form_presidente = MiembroForm(
+                instance=pres_oe,
+                prefix='presidente')
+
+        if sec:
+            form_secretario = MiembroForm(
+                instance=sec[0],
+                prefix='secretario')
+        else:
+            form_secretario = MiembroForm(
+                instance=sec_oe,
+                prefix='secretario')
+
+        if tes:
+            form_tesorero = MiembroForm(
+                instance=tes[0],
+                prefix='tesorero')
+        else:
+            form_tesorero = MiembroForm(
+                instance=tes_oe,
+                prefix='tesorero')
+
+        if redes:
+            form_redes = MiembroForm(
+                instance=redes[0],
+                prefix='redes')
+        else:
+            form_redes = MiembroForm(
+                instance=redes_oe,
+                prefix='redes')
+
+    args['form_presidente'] = form_presidente
+    args['form_secretario'] = form_secretario
+    args['form_tesorero'] = form_tesorero
+    args['form_redes'] = form_redes
+
     return render(request, "foe/forms/miembro.html", args)
 
 
@@ -117,11 +223,9 @@ def datos_bancarios(request):
             form = BancarioForm(request.POST, request.FILES, instance=m[0])
         else:
             form = BancarioForm(request.POST, request.FILES, instance=m_oe)
-        print(request.FILES)
-        print(form.is_valid())
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect(reverse('registro_miembro'))
 
     else:
         if m:

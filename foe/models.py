@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 from django.db import models
@@ -52,7 +53,9 @@ class Comite(models.Model):
                                                     MaxValueValidator(20)])
     correo = models.EmailField(verbose_name='Correo electrónico')
     telefono = models.IntegerField(verbose_name='Teléfono')
-    aportacion = models.FloatField(verbose_name='Aportación al fondo')
+    ingreso = models.FloatField(verbose_name='Ingreso de la representación')
+    aportacion = models.FloatField(verbose_name='Aportación al fondo',
+                                   help_text='Porcentaje de aportación')
 
     def __unicode__(self):
         return u'%s, (Comité Técnico)' % self.nombre
@@ -148,7 +151,8 @@ class Miembro(models.Model):
                                                  Estudiantil')
     nombre = models.CharField(max_length=200, verbose_name='Nombre completo')
     foto = models.ImageField(verbose_name='Foto de perfil', blank=True,
-                             null=True)
+                             null=True,
+                             help_text='Este campo no es obligatorio')
     cargo = models.CharField(max_length=32, default='colaborador',
                              choices=CARGO_CHOICES, verbose_name='Cargo')
     carrera = models.CharField(max_length=100, default='actuaria',
@@ -165,7 +169,7 @@ class Miembro(models.Model):
                                         validators=[MinValueValidator(1),
                                                     MaxValueValidator(20)])
     correo = models.EmailField(verbose_name='Correo electrónico')
-    telefono = models.IntegerField(verbose_name='Teléfono',
+    telefono = models.BigIntegerField(verbose_name='Teléfono',
                                    blank=True, null=True)
 
     def __unicode__(self):
@@ -193,7 +197,8 @@ class DatosBancarios(models.Model):
     cuenta = models.IntegerField(verbose_name='Número de Cuenta')
     CLABE = models.IntegerField(verbose_name='CLABE')
     tarjeta = models.IntegerField(verbose_name='Número de tarjeta',
-                                  blank=True, null=True)
+                                  blank=True, null=True,
+                                  help_text='Este campo no es obligatorio')
 
     def __unicode__(self):
         return self.organizacion_estudiantil.nombre

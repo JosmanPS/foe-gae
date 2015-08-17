@@ -18,7 +18,7 @@ class MiembroForm(ModelForm):
 
     class Meta:
         model = Miembro
-        exclude = ['organizacion_estudiantil']
+        exclude = ['organizacion_estudiantil', 'cargo', 'foto']
 
 
 class BancarioForm(ModelForm):
